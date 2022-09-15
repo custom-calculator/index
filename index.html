@@ -21,52 +21,49 @@
             <h4> {{allInputs}}</h4>
           </div>
           <!-- FIRST ROW -->
-          <div class="col-md-8 col-sm-8">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="clearAll">C</button>
+          <div class="col-md-8 col-sm-8 col-8">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center w-100" @click="clearAll">C</button>
           </div>
-          <!-- <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="clearCurrentNumber">CE</button>
-          </div> -->
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="erase">⟵</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center w-100" @click="erase">⟵</button>
           </div>
 
    
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('-')">—</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center w-100" @click="arithmetic('-')">—</button>
           </div>
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('*')">x</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center w-100" @click="arithmetic('*')">x</button>
           </div>
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('/')">÷</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center w-100" @click="arithmetic('/')">÷</button>
           </div>
 
           <!-- NUMBERS -->
-          <div class="col-md-4  col-sm-4"v-for="num in this.numbers[0]">
-              <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(num)">{{num}}</button>
+          <div class="col-md-4  col-sm-4 col-4"v-for="num in this.numbers[0]">
+              <button type="button" class="btn btn-primary m-1 p-3 text-center w-100" @click="addToField(num)">{{num}}</button>
           </div>
-          <div class="col-md-4  col-sm-4"v-for="num in this.numbers[1]">
-            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(num)">{{num}}</button>
+          <div class="col-md-4  col-sm-4 col-4"v-for="num in this.numbers[1]">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center w-100" @click="addToField(num)">{{num}}</button>
           </div>
-          <div class="col-md-4  col-sm-4"v-for="num in this.numbers[2]">
-            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(num)">{{num}}</button>
+          <div class="col-md-4  col-sm-4 col-4"v-for="num in this.numbers[2]">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center w-100" @click="addToField(num)">{{num}}</button>
           </div>
           <!-- END ROWS -->
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('+')">+</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center w-100" @click="arithmetic('+')">+</button>
           </div>
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(0)">0</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center w-100" @click="addToField(0)">0</button>
           </div>
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField('.')">.</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center w-100" @click="addToField('.')">.</button>
           </div>
-          <div class="col-md-8 col-sm-8">
-            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="customFormula">CUSTOM FORMULA</button>
+          <div class="col-md-8 col-sm-8 col-8">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center w-100" @click="customFormula">CUSTOM FORMULA</button>
           </div>
-          <div class="col-md-4 col-sm-4">
-            <button type="button" class="btn btn-success m-1 p-3 text-center" @click="compute">=</button>
+          <div class="col-md-4 col-sm-4 col-4">
+            <button type="button" class="btn btn-success m-1 p-3 text-center w-100" @click="compute">=</button>
           </div>
          
           <div class="col-md-12">
@@ -181,8 +178,7 @@
   button{
     font-family: "Roboto", sans-serif;
     font-size: 20px !important;
-    width: 100%;
-    min-width: 60px;
+    max-width: 400px;
     align-content: center;
   }
  
