@@ -130,6 +130,7 @@
         },
         erase(){
           this.input = this.input.slice(0, -1) 
+          this.wholeExpression = this.input;
         },
         arithmetic(symbol){
           this.input = `${this.input}${symbol}`;
