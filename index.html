@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Formula</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+</head>
+<body class="container py-3">
+    <div id="app">
+      <div class="col d-flex justify-content-center">
+       
+        <div class="row mx-auto">   
+          
+          <div class="col-md-12 border p-3 mb-3 text-right" style="height: 120px;">
+            <h4> {{allInputs}}</h4>
+          </div>
+          <!-- FIRST ROW -->
+          <div class="col-md-8 col-sm-8">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="clearAll">C</button>
+          </div>
+          <!-- <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="clearCurrentNumber">CE</button>
+          </div> -->
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="erase">⟵</button>
+          </div>
+
+   
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('-')">—</button>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('*')">x</button>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('/')">÷</button>
+          </div>
+
+          <!-- NUMBERS -->
+          <div class="col-md-4  col-sm-4"v-for="num in this.numbers[0]">
+              <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(num)">{{num}}</button>
+          </div>
+          <div class="col-md-4  col-sm-4"v-for="num in this.numbers[1]">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(num)">{{num}}</button>
+          </div>
+          <div class="col-md-4  col-sm-4"v-for="num in this.numbers[2]">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(num)">{{num}}</button>
+          </div>
+          <!-- END ROWS -->
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="arithmetic('+')">+</button>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField(0)">0</button>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-primary m-1 p-3 text-center" @click="addToField('.')">.</button>
+          </div>
+          <div class="col-md-8 col-sm-8">
+            <button type="button" class="btn btn-outline-primary m-1 p-3 text-center" @click="customFormula">CUSTOM FORMULA</button>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <button type="button" class="btn btn-success m-1 p-3 text-center" @click="compute">=</button>
+          </div>
+         
+          <div class="col-md-12">
+            <details v-if="this.history.length>0">
+              <summary>History</summary>
+              <br>
+            <div class="border-bottom py-2 row"v-for="item in this.history">
+              <div class="col-md-6 text-left">{{item.expression}}</div>
+              <div class="col-md-6 text-right"> = {{item.result}}</div>
+            </div>
+            </details>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+
+<script>
+ const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        input: '',
+        wholeExpression:'',
+        result: '',
+        object : {
+          expression: '',
+          result: '',
+        },
+        history: [],
+        numbers: [
+          [7, 8, 9],
+          [4, 5, 6],
+          [1, 2, 3],
+        ],
+        functions1: ['C', 'CE', '⟵'],
+      }
+    },
+
+    created(){
+     console.log(this.numbers[0])
+    },
+    methods: {
+        addToField(num){
+          this.reset();
+          this.input = `${this.input}${num}`;
+          this.wholeExpression = this.input;
+        },
+        clearAll(){
+          this.wholeExpression = '';
+          this.input = '';
+          this.result = '';
+        },
+        clearCurrentNumber(){
+          this.input = '';
+        },
+        erase(){
+          this.input = this.input.slice(0, -1) 
+        },
+        arithmetic(symbol){
+          this.input = `${this.input}${symbol}`;
+          this.wholeExpression = this.input;
+        },
+        compute(){
+          
+          this.result = eval(this.wholeExpression);
+          this.history.push({
+            expression: `${this.wholeExpression}`,
+            result: `${this.result}`,
+          });
+
+        },
+        customFormula(){
+
+        },
+        checkInput(){
+
+        },
+        reset(){
+          if(this.result!=''){
+            this.input = '';
+            this.wholeExpression = '';
+            this.result = '';
+          }
+        }
+
+    },
+    computed:{
+      allInputs() {
+        if(this.result!=''){
+          return `${this.wholeExpression} = ${this.result}`;
+        }
+        return `${this.wholeExpression}`;
+      }
+    },
+  }).mount('#app')
+</script>
+
+<style>
+  *{
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 1px;
+  }
+  button{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px !important;
+    width: 100%;
+    min-width: 60px;
+    align-content: center;
+  }
+ 
+  body{
+    width: 600px !important;
+  }
+
+  h4{
+    font-size: 40px !important;
+  }
+
+</style>
